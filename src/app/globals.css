@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Sarvam-style light theme — warm off-white canvas, near-black ink */
+  --background: 40 20% 98%;
+  --foreground: 0 0% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 10%;
+  --muted: 40 10% 94%;
+  --muted-foreground: 220 9% 42%;
+  --border: 40 8% 89%;
+  --input: 40 10% 94%;
+  --ring: 243 75% 59%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Soft ambient wash — barely-there brand tint on the warm canvas */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(60rem 60rem at 12% -8%, rgba(79, 70, 229, 0.07), transparent 60%),
+    radial-gradient(50rem 50rem at 100% 0%, rgba(6, 182, 212, 0.06), transparent 55%),
+    radial-gradient(44rem 44rem at 50% 118%, rgba(79, 70, 229, 0.05), transparent 60%);
+}
+
+@layer components {
+  /* Clean white panels with hairline border + soft shadow */
+  .glass {
+    @apply border border-black/[0.06] bg-white/80 backdrop-blur-xl;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 12px 28px -18px rgba(16, 24, 40, 0.18);
+  }
+  .glass-strong {
+    @apply border border-black/[0.07] bg-white/90 backdrop-blur-2xl;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 16px 40px -20px rgba(16, 24, 40, 0.22);
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-indigo-500 to-accent bg-clip-text text-transparent;
+  }
+  .btn-glow {
+    box-shadow: 0 1px 2px rgba(79, 70, 229, 0.2), 0 10px 30px -12px rgba(79, 70, 229, 0.5);
+  }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(16, 24, 40, 0.16);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 24, 40, 0.28);
+  background-clip: content-box;
+}
+
+/* Markdown/code base tweaks */
+.prose-chat pre {
+  margin: 0;
+  background: transparent !important;
+}
+.prose-chat code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* Waveform bars */
+.wave-bar {
+  width: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #06b6d4, #4f46e5);
+}
+
+@keyframes typing-blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+.typing-dot {
+  animation: typing-blink 1.2s infinite;
+}
